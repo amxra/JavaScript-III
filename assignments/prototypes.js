@@ -108,47 +108,12 @@
   - Babies should have the ability to play, which persons don't.
   - By playing, a string is returned with some text of your choosing.*/
 
-  function Shirt(make,color) {
-    this.color = color;
-    this.make = make;
-    this.isClean = true;
-    this.isIroned = true;
-    this.numOfWears = 0;
-    this.inGoodCondition = true;
+  function Baby(name, age) {
+    Person.call(this, name, age);
   }
-  Shirt.prototype.wash = function () {
-    if (this.isClean) {
-      return "Clean";
-    } else {
-      this.isClean = true;
-    }
-  }
-  Shirt.prototype.iron = function () {
-    if (this.isIroned) {
-      return "Ironed";
-    } else {
-      this.isIroned = true;
-    }
-  }
-  Shirt.prototype.wear = function () {
-    if (this.inGoodCondition) {
-      if (this.isClean && this.isIroned) {
-        this.numOfWears += 1;
-        this.isClean = false;
-        this.isIroned = false;
-        if(this.numOfWears > 10){
-          this.inGoodCondition = false;
-        }
-      }
-      else {
-        return "Ensure shirt is washed and ironed ";
-      }
-    } else {
-      return "Mend this shirt before  wearing"
-    }
-  }
-  Shirt.prototype.mend = function(){
-    this.inGoodCondition = true;
+  Baby.prototype = Object.create(Person.prototype);
+  Baby.prototype.play = function () {
+    return "Yay!";
   }
 
  /* TASK 4
@@ -159,6 +124,48 @@
 
 */
 
+function Shirt(make,color) {
+  this.color = color;
+  this.make = make;
+  this.isClean = true;
+  this.isIroned = true;
+  this.numOfWears = 0;
+  this.inGoodCondition = true;
+}
+Shirt.prototype.wash = function () {
+  if (this.isClean) {
+    return "Clean";
+  } else {
+    this.isClean = true;
+  }
+}
+Shirt.prototype.iron = function () {
+  if (this.isIroned) {
+    return "Ironed";
+  } else {
+    this.isIroned = true;
+  }
+}
+Shirt.prototype.wear = function () {
+  if (this.inGoodCondition) {
+    if (this.isClean && this.isIroned) {
+      this.numOfWears += 1;
+      this.isClean = false;
+      this.isIroned = false;
+      if(this.numOfWears > 10){
+        this.inGoodCondition = false;
+      }
+    }
+    else {
+      return "Ensure shirt is washed and ironed ";
+    }
+  } else {
+    return "Mend this shirt before  wearing"
+  }
+}
+Shirt.prototype.mend = function(){
+  this.inGoodCondition = true;
+}
 /*
 
   STRETCH TASK
