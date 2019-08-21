@@ -50,10 +50,9 @@
 
 // code example for Explicit Binding
 
-function girl (name, age, job){
+    function anotherGirl (name, job) {
+         console.log(this);
+         return `Her name is ${name}, she is a ${job}`
+ }
 
-    return `hi, my name is ${name}, i am ${age} and i work as a ${job}`
-
-}
-
-girl.call(banana, 'Tosin', 25, 'Software engineer')
+ anotherGirl.call( "Nigeria", 'Tosin', 'Software engineer')
