@@ -46,16 +46,16 @@
   - Give persons the ability to poop.
   - When pooping, the stomach should empty. */
 
-  function Person (name,age){
+  function Person (name,age) {
     this.name = name;
     this.age =age;
     this.stomach = [];
   }
-  Person.prototype.greet = function(){
+  Person.prototype.greet = function() {
     return `Hi! My name is ${this.name}, I am ${this.age} years old`;
   }
   
-  Person.prototype.eat = function(food){
+  Person.prototype.eat = function(food) {
     this.stomach.push(food);
   }
   Person.prototype.poop = function(){
@@ -80,7 +80,7 @@
   - Give cars the ability to be repaired.
   - A repaired car can be driven again. */
 
-  function Car(modelName, make){
+  function Car(modelName, make) {
     this.model = modelName;
     this.make = make;
     this.odometer = 0;
@@ -106,9 +106,52 @@
   - Build a Baby constructor that subclasses the Person built earlier.
   - Babies of course inherit the ability to greet, which can be strange.
   - Babies should have the ability to play, which persons don't.
-  - By playing, a string is returned with some text of your choosing.
+  - By playing, a string is returned with some text of your choosing.*/
 
-  TASK 4
+  function Shirt(make,color) {
+    this.color = color;
+    this.make = make;
+    this.isClean = true;
+    this.isIroned = true;
+    this.numOfWears = 0;
+    this.inGoodCondition = true;
+  }
+  Shirt.prototype.wash = function () {
+    if (this.isClean) {
+      return "Clean";
+    } else {
+      this.isClean = true;
+    }
+  }
+  Shirt.prototype.iron = function () {
+    if (this.isIroned) {
+      return "Ironed";
+    } else {
+      this.isIroned = true;
+    }
+  }
+  Shirt.prototype.wear = function () {
+    if (this.inGoodCondition) {
+      if (this.isClean && this.isIroned) {
+        this.numOfWears += 1;
+        this.isClean = false;
+        this.isIroned = false;
+        if(this.numOfWears > 10){
+          this.inGoodCondition = false;
+        }
+      }
+      else {
+        return "Ensure shirt is washed and ironed ";
+      }
+    } else {
+      return "Mend this shirt before  wearing"
+    }
+  }
+  Shirt.prototype.mend = function(){
+    this.inGoodCondition = true;
+  }
+
+ /* TASK 4
 
   Use your imagination and come up with constructors that allow to build objects
   With amazing and original capabilities. Build 3 small ones, or a very
