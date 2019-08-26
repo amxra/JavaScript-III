@@ -44,9 +44,33 @@
   - Give persons the ability to eat edibles.
   - When eating an edible, it should be pushed into a "stomach" property which is an array.
   - Give persons the ability to poop.
-  - When pooping, the stomach should empty.
+  - When pooping, the stomach should empty. */
 
-  TASK 2
+  function Person (name,age) {
+    this.name = name;
+    this.age =age;
+    this.stomach = [];
+  }
+  Person.prototype.greet = function() {
+    return `Hi! My name is ${this.name}, I am ${this.age} years old`;
+  }
+  
+  Person.prototype.eat = function(food) {
+    this.stomach.push(food);
+  }
+  Person.prototype.poop = function(){
+    this.stomach = [];
+  }
+
+  // const moyo = new Person("Moyo", 12)
+  // console.log(moyo.greet());
+  // moyo.eat('pasta');
+  // console.log(moyo.stomach);
+  // moyo.poop()
+  // console.log(moyo.stomach)
+
+
+  /*TASK 2
 
   - Build a Car constructor that takes model name and make.
   - Give cars the ability to drive a distance.
@@ -54,16 +78,45 @@
   - Give cars the ability to crash.
   - A crashed car can't be driven any more. Attempts return a string "I crashed at x miles!", x being the miles in the odometer.
   - Give cars the ability to be repaired.
-  - A repaired car can be driven again.
+  - A repaired car can be driven again. */
 
-  TASK 3
+  function Car(modelName, make) {
+    this.model = modelName;
+    this.make = make;
+    this.odometer = 0;
+    this.isCrashed = false;
+  }
+  Car.prototype.drive = function(distance){
+    if(this.isCrashed === false){
+      this.odometer += distance;
+    } else {
+      return `I crashed at ${this.odometer} miles!`
+    }
+  }
+  Car.prototype.crash = function(){
+    this.isCrashed = true;
+  }
+  Car.prototype.repair = function(){
+    this.isCrashed = false;
+  }
+
+
+  /*TASK 3
 
   - Build a Baby constructor that subclasses the Person built earlier.
   - Babies of course inherit the ability to greet, which can be strange.
   - Babies should have the ability to play, which persons don't.
-  - By playing, a string is returned with some text of your choosing.
+  - By playing, a string is returned with some text of your choosing.*/
 
-  TASK 4
+  function Baby(name, age) {
+    Person.call(this, name, age);
+  }
+  Baby.prototype = Object.create(Person.prototype);
+  Baby.prototype.play = function () {
+    return "Yay!";
+  }
+
+ /* TASK 4
 
   Use your imagination and come up with constructors that allow to build objects
   With amazing and original capabilities. Build 3 small ones, or a very
@@ -71,6 +124,48 @@
 
 */
 
+function Shirt(make,color) {
+  this.color = color;
+  this.make = make;
+  this.isClean = true;
+  this.isIroned = true;
+  this.numOfWears = 0;
+  this.inGoodCondition = true;
+}
+Shirt.prototype.wash = function () {
+  if (this.isClean) {
+    return "Clean";
+  } else {
+    this.isClean = true;
+  }
+}
+Shirt.prototype.iron = function () {
+  if (this.isIroned) {
+    return "Ironed";
+  } else {
+    this.isIroned = true;
+  }
+}
+Shirt.prototype.wear = function () {
+  if (this.inGoodCondition) {
+    if (this.isClean && this.isIroned) {
+      this.numOfWears += 1;
+      this.isClean = false;
+      this.isIroned = false;
+      if(this.numOfWears > 10){
+        this.inGoodCondition = false;
+      }
+    }
+    else {
+      return "Ensure shirt is washed and ironed ";
+    }
+  } else {
+    return "Mend this shirt before  wearing"
+  }
+}
+Shirt.prototype.mend = function(){
+  this.inGoodCondition = true;
+}
 /*
 
   STRETCH TASK
